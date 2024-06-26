@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hquality/l10n/l10n.dart';
 import 'package:hquality/utils/utils.dart';
+import 'package:hquality/l10n/language_picker.dart';
 
 class SignUpPage extends StatefulWidget {
   static const routeName = '/sign-up';
+  final L10n l10n;
+
+  SignUpPage({required this.l10n});
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -18,7 +23,20 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: Text(widget.l10n.translate("Sign Up", Localizations.localeOf(context).languageCode)),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.language),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return LanguagePickerDialog(l10n: widget.l10n);
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),

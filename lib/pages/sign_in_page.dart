@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hquality/l10n/l10n.dart';
+import 'package:hquality/utils/utils.dart';
+import 'package:hquality/l10n/language_picker.dart';
 import 'sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {
   static const routeName = '/sign-in';
+  final L10n l10n;
+
+  SignInPage({required this.l10n});
 
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -17,7 +23,20 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'),
+        title: Text(widget.l10n.translate("Sign In", Localizations.localeOf(context).languageCode)),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.language),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return LanguagePickerDialog(l10n: widget.l10n);
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -28,13 +47,13 @@ class _SignInPageState extends State<SignInPage> {
             children: [
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(labelText: widget.l10n.translate("Email", Localizations.localeOf(context).languageCode)),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
+                    return widget.l10n.translate("Please enter your email", Localizations.localeOf(context).languageCode);
                   }
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Please enter a valid email address';
+                  if (!emailRegExp.hasMatch(value)) {
+                    return widget.l10n.translate("Please enter a valid email address", Localizations.localeOf(context).languageCode);
                   }
                   return null;
                 },

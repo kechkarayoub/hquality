@@ -1,0 +1,47 @@
+{
+  "Email": {
+    "ar": "البريد إلكتروني",
+    "en": "Email",
+    "fr": "Email"
+  },
+  "language_ar": {
+    "ar": "العربية",
+    "en": "Arabic",
+    "fr": "Arabe"
+  },
+  "language_en": {
+    "ar": "الإنجليزية",
+    "en": "English",
+    "fr": "Anglais"
+  },
+  "language_fr": {
+    "ar": "الفرنسية",
+    "en": "French",
+    "fr": "Français"
+  },
+  "Please enter a valid email address": {
+    "ar": "المرجو إدخال بريد إلكتروني صحيح",
+    "en": "Please enter your email",
+    "fr": "Veuillez saisir une adresse e-mail valide"
+  },
+  "Please enter your email": {
+    "ar": "المرجو إدخال البريدك الإلكتروني",
+    "en": "Please enter your email",
+    "fr": "Veuillez entrer votre email"
+  },
+  "Select Language": {
+    "ar": "اختر اللغة",
+    "en": "Select Language",
+    "fr": "Sélectionner la langue"
+  },
+  "Sign In": {
+    "ar": "تسجيل الدخول",
+    "en": "Sign In",
+    "fr": "Se connecter"
+  },
+  "Sign Up": {
+    "ar": "تسجيل الدخول",
+    "en": "Sign Up",
+    "fr": "S'inscrire"
+  }
+}
