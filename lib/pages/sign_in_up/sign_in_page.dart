@@ -96,6 +96,7 @@ class _SignInPageState extends State<SignInPage> {
     // Add your sign-in logic here, such as an HTTP request to your backend.
     final email = _emailController.text;
     final password = _passwordController.text;
+    var userSession = {"lastName": "last_name"};
 
     print('Email: $email');
     print('Password: $password');
