@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hquality/l10n/l10n.dart';
-import 'package:hquality/utils/utils.dart';
 import 'package:hquality/l10n/language_picker.dart';
+import 'package:hquality/storage/storage.dart';
+import 'package:hquality/utils/utils.dart';
 
 class SignUpPage extends StatefulWidget {
   static const routeName = '/sign-up';
   final L10n l10n;
+  final StorageService storageService;
 
-  SignUpPage({required this.l10n});
+  SignUpPage({required this.l10n, required this.storageService});
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  SignUpPageState createState() => SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -31,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return LanguagePickerDialog(l10n: widget.l10n);
+                  return LanguagePickerDialog(l10n: widget.l10n, storageService: widget.storageService);
                 },
               );
             },
@@ -47,37 +49,37 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               TextFormField(
                 controller: _lastNameController,
-                decoration: InputDecoration(labelText: 'Last name'),
+                decoration: InputDecoration(labelText: widget.l10n.translate("Last name", Localizations.localeOf(context).languageCode)),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your last name';
+                    return widget.l10n.translate("Please enter your last name", Localizations.localeOf(context).languageCode);
                   }
                   if (!nameRegExp.hasMatch(value)) {
-                    return 'Last name can only contain alphabetic characters, hyphens, or apostrophes';
+                    return widget.l10n.translate("Last name can only contain alphabetic characters, hyphens, or apostrophes", Localizations.localeOf(context).languageCode);
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(labelText: widget.l10n.translate("Email", Localizations.localeOf(context).languageCode)),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
+                    return widget.l10n.translate("Please enter your email", Localizations.localeOf(context).languageCode);
                   }
                   if (!emailRegExp.hasMatch(value)) {
-                    return 'Please enter a valid email address';
+                    return widget.l10n.translate("Please enter a valid email address", Localizations.localeOf(context).languageCode);
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(labelText: widget.l10n.translate("Password", Localizations.localeOf(context).languageCode)),
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
+                    return widget.l10n.translate("Please enter your pawwaord", Localizations.localeOf(context).languageCode);
                   }
                   return null;
                 },
@@ -90,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     signUpUser();
                   }
                 },
-                child: Text('Sign Up'),
+                child: Text(widget.l10n.translate("Sign up", Localizations.localeOf(context).languageCode)),
               ),
             ],
           ),

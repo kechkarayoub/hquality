@@ -1,8 +1,18 @@
 {
+  "Don't have an account? Sign up": {
+    "ar": "ليس لديك حساب؟ قم بالتسجيل",
+    "en": "Don't have an account? Sign up",
+    "fr": "Vous n'avez pas de compte ? S'inscrire"
+  },
   "Email": {
     "ar": "البريد إلكتروني",
     "en": "Email",
     "fr": "Email"
+  },
+  "Hello": {
+    "ar": "مرحبا",
+    "en": "Hello",
+    "fr": "Bonjour"
   },
   "language_ar": {
     "ar": "العربية",
@@ -19,6 +29,21 @@
     "en": "French",
     "fr": "Français"
   },
+  "Last name": {
+    "ar": "اسم العائلة",
+    "en": "Last name",
+    "fr": "Nom de famille"
+  },
+  "Last name can only contain alphabetic characters, hyphens, or apostrophes": {
+    "ar": "اسم العائلة لا يمكن أن يحتوي إلا على أحرف أبجدية أو شرطات أو فواصل عليا.",
+    "en": "Last name can only contain alphabetic characters, hyphens, or apostrophes",
+    "fr": "Le nom de famille ne peut contenir que des caractères alphabétiques, des traits d'union ou des apostrophes."
+  },
+  "Password": {
+    "ar": "كلمة المرور",
+    "en": "Password",
+    "fr": "Mot de passe"
+  },
   "Please enter a valid email address": {
     "ar": "المرجو إدخال بريد إلكتروني صحيح",
     "en": "Please enter your email",
@@ -28,6 +53,16 @@
     "ar": "المرجو إدخال البريدك الإلكتروني",
     "en": "Please enter your email",
     "fr": "Veuillez entrer votre email"
+  },
+  "Please enter your last name": {
+    "ar": "المرجو إدخال الإسم العائلي",
+    "en": "Please enter your last name",
+    "fr": "Veuillez entrer votre nom de famille"
+  },
+  "Please enter your password": {
+    "ar": "المرجو إدخال كلمة المرور",
+    "en": "Please enter your password",
+    "fr": "Veuillez entrer votre mot de passe"
   },
   "Select Language": {
     "ar": "اختر اللغة",

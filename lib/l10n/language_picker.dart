@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'l10n.dart';
+import 'package:flutter/material.dart';
+import 'package:hquality/storage/storage.dart';
 
 class LanguagePickerDialog extends StatelessWidget {
-  final L10n l10n;
 
-  LanguagePickerDialog({required this.l10n});
+  final L10n l10n;
+  final StorageService storageService;
+
+  LanguagePickerDialog({required this.l10n, required this.storageService});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class LanguagePickerDialog extends StatelessWidget {
         for (Locale locale in l10n.supportedLocales)
           SimpleDialogOption(
             onPressed: () {
-              l10n.setLocale(locale);
+              storageService.set("current_language", locale.toString());
               Navigator.pop(context); // Close the dialog
             },
             child: Text(l10n.translate("language_${locale.languageCode}", Localizations.localeOf(context).languageCode)),

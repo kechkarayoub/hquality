@@ -1,19 +1,12 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:hquality/utils/utils.dart';
+import 'package:flutter/services.dart';
 
 class L10n {
 
-  late Locale _locale;
   late Map<String, Map<String, String>> _translations;
-  final ValueNotifier<Locale> _localeNotifier;
 
-  L10n() : _localeNotifier = ValueNotifier(Locale(defaultLanguage)) {
-    _locale = Locale(defaultLanguage); // Default locale
-  }
-
-  Locale get locale => _localeNotifier.value;
+  L10n();
 
   List<Locale> get supportedLocales => [
     Locale('en'),
@@ -42,10 +35,4 @@ class L10n {
     // If translation not found, return the key itself
     return key;
   }
-
-  void setLocale(Locale newLocale) {
-    _localeNotifier.value = newLocale;
-  }
-
-  ValueNotifier<Locale> get localeNotifier => _localeNotifier;
 }

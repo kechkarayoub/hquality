@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:hquality/l10n/l10n.dart';
 import 'package:hquality/utils/utils.dart';
 import 'package:hquality/l10n/language_picker.dart';
+import 'package:hquality/storage/storage.dart';
 import 'sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {
   static const routeName = '/sign-in';
   final L10n l10n;
+  final StorageService storageService;
 
-  SignInPage({required this.l10n});
+  SignInPage({required this.l10n, required this.storageService});
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  SignInPageState createState() => SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -31,7 +33,7 @@ class _SignInPageState extends State<SignInPage> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return LanguagePickerDialog(l10n: widget.l10n);
+                  return LanguagePickerDialog(l10n: widget.l10n, storageService: widget.storageService);
                 },
               );
             },
@@ -60,11 +62,11 @@ class _SignInPageState extends State<SignInPage> {
               ),
               TextFormField(
                 controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(labelText: widget.l10n.translate("Password", Localizations.localeOf(context).languageCode)),
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
+                    return widget.l10n.translate("Please enter your password", Localizations.localeOf(context).languageCode);
                   }
                   return null;
                 },
@@ -74,16 +76,16 @@ class _SignInPageState extends State<SignInPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     // Perform the sign-in logic
-                    signInUser();
+                    signInUser(widget.storageService);
                   }
                 },
-                child: Text('Sign In'),
+                child: Text(widget.l10n.translate("Sign in", Localizations.localeOf(context).languageCode)),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, SignUpPage.routeName);
                 },
-                child: Text('Don\'t have an account? Sign Up'),
+                child: Text(widget.l10n.translate("Don't have an account? Sign up", Localizations.localeOf(context).languageCode)),
               ),
             ],
           ),
@@ -92,12 +94,12 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  void signInUser() {
+  void signInUser(StorageService storageService) {
     // Add your sign-in logic here, such as an HTTP request to your backend.
     final email = _emailController.text;
     final password = _passwordController.text;
-    var userSession = {"lastName": "last_name"};
-
+    var userSession = {"last_name": "last_name"};
+    storageService.set("user_session", userSession);
     print('Email: $email');
     print('Password: $password');
 
