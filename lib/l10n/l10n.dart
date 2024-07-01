@@ -8,12 +8,14 @@ class L10n {
 
   L10n();
 
+  // List of supported locales
   List<Locale> get supportedLocales => [
     Locale('en'),
     Locale('ar'),
     Locale('fr'),
   ];
 
+  // Load translations from a JSON file
   Future<void> loadTranslations() async {
     String data = await rootBundle.loadString('lib/l10n/translations.json');
     Map<String, dynamic> decodedData = json.decode(data);
@@ -22,6 +24,7 @@ class L10n {
     });
   }
 
+  // Translate a key to the appropriate language
   String translate(String key, String locale) {
     if (_translations.containsKey(key)) {
       final Map<String, String> translationsForKey = _translations[key]!;

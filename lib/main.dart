@@ -5,6 +5,7 @@ import 'package:hquality/pages/dashboard/dashboard.dart';
 import 'package:hquality/pages/sign_in_up/sign_in_page.dart';
 import 'package:hquality/pages/sign_in_up/sign_up_page.dart';
 import 'package:hquality/storage/storage.dart';
+import 'package:hquality/utils/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder<dynamic>(
       valueListenable: storageService.storageNotifier,
       builder: (context, storage, _) {
+        print(storage);
         dynamic userSession = storage['user_session'];
-        String currentLanguage = storage['current_language'];
+        String currentLanguage = storage['current_language'] ?? defaultLanguage;
         return MaterialApp(
           builder: (context, child) {
             return Scaffold(

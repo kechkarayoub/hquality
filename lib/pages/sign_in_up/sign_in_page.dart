@@ -99,7 +99,7 @@ class SignInPageState extends State<SignInPage> {
     final email = _emailController.text;
     final password = _passwordController.text;
     var userSession = {"last_name": "last_name"};
-    storageService.set("user_session", userSession);
+    storageService.set(key: "user_session", obj: userSession, updateNotifier: true);
     print('Email: $email');
     print('Password: $password');
 

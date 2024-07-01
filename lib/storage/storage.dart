@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:hquality/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class StorageService {
-  final ValueNotifier<dynamic> _storageNotifier = ValueNotifier<dynamic>({});
+  final ValueNotifier<dynamic> _storageNotifier = ValueNotifier<dynamic>({}); // The notifier that will updated to refresh app
 
   StorageService(){
     _initStorageNotifier();
@@ -18,7 +17,7 @@ class StorageService {
       "current_language": await get("current_language"),
       "user_session": await get("user_session"),
     };
-    _storageNotifier.value = state;
+    _storageNotifier.value = state; // refresh notifier with current storage
   }
 
   Future<void> _initStorageNotifier() async {
@@ -36,20 +35,24 @@ class StorageService {
     }
     return jsonDecode(objString);
   }
-  void remove(String key) async {
+  void remove({required String key, bool updateNotifier=false}) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(key);
-    _updateNotifier();
+    if(updateNotifier){
+      _updateNotifier();
+    }
   }
 
-  void set(String key, dynamic obj) async {
+  void set({required String key, required dynamic obj, bool updateNotifier=false}) async {
     final prefs = await SharedPreferences.getInstance();
     String objString = "";
     if(obj != null){
       objString = jsonEncode(obj);
     }
     await prefs.setString(key, objString);
-    _updateNotifier();
+    if(updateNotifier){
+      _updateNotifier();
+    }
   }
   
   ValueNotifier<dynamic> get storageNotifier => _storageNotifier;

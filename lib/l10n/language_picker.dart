@@ -17,7 +17,7 @@ class LanguagePickerDialog extends StatelessWidget {
         for (Locale locale in l10n.supportedLocales)
           SimpleDialogOption(
             onPressed: () {
-              storageService.set("current_language", locale.toString());
+              storageService.set(key: "current_language", obj: locale.toString(), updateNotifier: true); // Save current_language in localstorage
               Navigator.pop(context); // Close the dialog
             },
             child: Text(l10n.translate("language_${locale.languageCode}", Localizations.localeOf(context).languageCode)),
