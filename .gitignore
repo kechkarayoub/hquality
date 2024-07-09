@@ -76,3 +76,6 @@ local.properties
 *.swo
 *.lock
 *~
+
+
+.env
