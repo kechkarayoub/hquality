@@ -24,6 +24,14 @@ class StorageService {
     _updateNotifier();
   }
 
+  Future<void> clear({bool updateNotifier=true}) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    if (updateNotifier) {
+      _updateNotifier();
+    }
+  }
+
   dynamic get(String key) async {
     final prefs = await SharedPreferences.getInstance();
     String objString = prefs.getString(key) ?? "";

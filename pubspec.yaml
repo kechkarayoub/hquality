@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   english_words: ^4.0.0
+  flutter_dotenv: ^5.0.2
   flutter_localizations:
     sdk: flutter
   http: ^1.2.0
@@ -30,4 +31,5 @@ dev_dependencies:
 flutter:
   assets:
     - lib/l10n/translations.json
+    - .env
   uses-material-design: true

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hquality/l10n/l10n.dart';
 import 'package:hquality/pages/dashboard/dashboard.dart';
@@ -8,6 +9,7 @@ import 'package:hquality/storage/storage.dart';
 import 'package:hquality/utils/utils.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   final l10n = L10n();
   await l10n.loadTranslations();

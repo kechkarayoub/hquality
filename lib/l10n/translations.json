@@ -9,6 +9,11 @@
     "en": "Email",
     "fr": "Email"
   },
+  "Email or Username": {
+    "ar": "البريد الإلكتروني أو اسم المستخدم",
+    "en": "Email or Username",
+    "fr": "Email ou Non d'utilisateur"
+  },
   "Hello": {
     "ar": "مرحبا",
     "en": "Hello",
@@ -39,6 +44,16 @@
     "en": "Last name can only contain alphabetic characters, hyphens, or apostrophes",
     "fr": "Le nom de famille ne peut contenir que des caractères alphabétiques, des traits d'union ou des apostrophes."
   },
+  "Logout": {
+    "ar": "تسجيل الخروج",
+    "en": "Logout",
+    "fr": "Se déconnecter"
+  },
+  "Menu": {
+    "ar": "القائمة",
+    "en": "Menu",
+    "fr": "Menu"
+  },
   "Password": {
     "ar": "كلمة المرور",
     "en": "Password",
@@ -49,10 +64,20 @@
     "en": "Please enter your email",
     "fr": "Veuillez saisir une adresse e-mail valide"
   },
+  "Please enter a valid username": {
+    "ar": "المرجو إدخال بريد إلكتروني صحيح",
+    "en": "Please enter a valid username",
+    "fr": "Veuillez saisir un nom d'utilisateur valide"
+  },
   "Please enter your email": {
     "ar": "المرجو إدخال البريدك الإلكتروني",
     "en": "Please enter your email",
     "fr": "Veuillez entrer votre email"
+  },
+  "Please enter your email or username": {
+    "ar": "المرجو إدخال البريد الإلكتروني أو اسم المستخدم",
+    "en": "Please enter your email or username",
+    "fr": "Veuillez entrer votre email ou votre nom d'utilisateur"
   },
   "Please enter your last name": {
     "ar": "المرجو إدخال الإسم العائلي",
@@ -78,5 +103,20 @@
     "ar": "تسجيل الدخول",
     "en": "Sign Up",
     "fr": "S'inscrire"
+  },
+  "Username can only contain letters, numbers, and underscores.": {
+    "ar": "يمكن أن يحتوي اسم المستخدم على أحرف وأرقام وشرطات سفلية فقط.",
+    "en": "Username can only contain letters, numbers, and underscores.",
+    "fr": "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et des traits de soulignement."
+  },
+  "Username must be between 3 and 20 characters long.": {
+    "ar": "يجب أن يتراوح طول اسم المستخدم بين 3 و20 حرفًا.",
+    "en": "Username must be between 3 and 20 characters long.",
+    "fr": "Le nom d'utilisateur doit comporter entre 3 et 20 caractères."
+  },
+  "Username must start with a letter.": {
+    "ar": "اسم المستخدم يجب أن يبدأ بحرف.",
+    "en": "Username must start with a letter.",
+    "fr": "Le nom d'utilisateur doit commencer par une lettre."
   }
 }

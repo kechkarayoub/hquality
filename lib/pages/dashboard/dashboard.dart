@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hquality/l10n/l10n.dart';
-import 'package:hquality/l10n/language_picker.dart';
 import 'package:hquality/storage/storage.dart';
+import 'package:hquality/utils/components.dart';
 
 class DashboardPage extends StatefulWidget {
   static const routeName = '/dashboard';
@@ -23,19 +23,10 @@ class DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         title: Text('${widget.l10n.translate("Hello", Localizations.localeOf(context).languageCode)} ${widget.userSession['last_name']}'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.language),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return LanguagePickerDialog(l10n: widget.l10n, storageService: widget.storageService);
-                },
-              );
-            },
-          ),
+          renderLanguagesIcon(widget.l10n, widget.storageService, context),
         ],
       ),
+      drawer: renderDrawerMenu(widget.l10n, widget.storageService, context),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: null,
