@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hquality/api/backend.dart';
+import 'package:hquality/components/gender_dropdown.dart';
 import 'package:hquality/l10n/l10n.dart';
 import 'package:hquality/storage/storage.dart';
 import 'package:hquality/utils/components.dart';
@@ -29,6 +30,7 @@ class SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordRepeatedController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  String? _selectedGender;
   String? _errorMessage;
 
   Future<void> _selectDate(BuildContext context) async {
@@ -114,9 +116,19 @@ class SignUpPageState extends State<SignUpPage> {
                     onTap: () => _selectDate(context),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please select your birthday';
+                        return widget.l10n.translate("Please select your birthday", Localizations.localeOf(context).languageCode);
                       }
                       return null;
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  GenderDropdown(
+                    l10n: widget.l10n,
+                    initialGender: _selectedGender,
+                    onChanged: (String? gender) {
+                      setState(() {
+                        _selectedGender = gender;
+                      });
                     },
                   ),
                   TextFormField(
@@ -158,7 +170,7 @@ class SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return widget.l10n.translate("Please enter your pawwaord", Localizations.localeOf(context).languageCode);
+                        return widget.l10n.translate("Please enter your password", Localizations.localeOf(context).languageCode);
                       }
                       else if(value.length < 8) {
                         return widget.l10n.translate("Password length must be greater than or equal to 8", Localizations.localeOf(context).languageCode);
@@ -175,7 +187,7 @@ class SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return widget.l10n.translate("Please re-enter your pawwaord", Localizations.localeOf(context).languageCode);
+                        return widget.l10n.translate("Please re-enter your password", Localizations.localeOf(context).languageCode);
                       }
                       else if(value.length < 8) {
                         return widget.l10n.translate("Password length must be greater than or equal to 8", Localizations.localeOf(context).languageCode);
@@ -222,6 +234,7 @@ class SignUpPageState extends State<SignUpPage> {
     final dynamic data = {
       "email": email,
       "first_name": firsName,
+      "gender": _selectedGender,
       "last_name": lastName,
       "selected_language": currentLanguage,
       "password": password,
