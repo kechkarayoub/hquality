@@ -24,6 +24,16 @@
     "en": "Email or Username",
     "fr": "Email ou Non d'utilisateur"
   },
+  "Female": {
+    "ar": "أنثى",
+    "en": "Female",
+    "fr": "Femelle"
+  },
+  "f_gender": {
+    "ar": "أنثى",
+    "en": "Female",
+    "fr": "Femelle"
+  },
   "First name": {
     "ar": "الاسم الشخصي",
     "en": "First name",
@@ -33,6 +43,11 @@
     "ar": "الاسم الشخصي لا يمكن أن يحتوي إلا على أحرف أبجدية أو شرطات أو فواصل عليا.",
     "en": "First name can only contain alphabetic characters, hyphens, or apostrophes",
     "fr": "Le prénom ne peut contenir que des caractères alphabétiques, des traits d'union ou des apostrophes."
+  },
+  "Gender": {
+    "ar": "الجنس",
+    "en": "Gender",
+    "fr": "Genre"
   },
   "Hello": {
     "ar": "مرحبا",
@@ -73,6 +88,16 @@
     "ar": "تسجيل الخروج",
     "en": "Logout",
     "fr": "Se déconnecter"
+  },
+  "Male": {
+    "ar": "ذكر",
+    "en": "Male",
+    "fr": "Mâle"
+  },
+  "m_gender": {
+    "ar": "ذكر",
+    "en": "Male",
+    "fr": "Mâle"
   },
   "Menu": {
     "ar": "القائمة",
@@ -134,14 +159,19 @@
     "en": "Please select your birthday",
     "fr": "Veuillez sélectionner votre date de naissance"
   },
+  "Please select your gender": {
+    "ar": "المرجو تحديد جنسك",
+    "en": "Please select your gender",
+    "fr": "Veuillez sélectionner votre genre"
+  },
   "Please re-enter your password": {
     "ar": "المرجو إعادة إدخال كلمة المرور",
     "en": "Please re-enter your password",
     "fr": "Veuillez entrer à nouveau votre mot de passe"
   },
-  "Re-enter your passworde": {
+  "Re-enter your password": {
     "ar": "أعد إدخال كلمة المرور",
-    "en": "Re-enter your passworde",
+    "en": "Re-enter your password",
     "fr": "Entrez à nouveau votre mot de passe"
   },
   "Select Language": {

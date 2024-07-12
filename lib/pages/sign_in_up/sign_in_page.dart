@@ -65,18 +65,6 @@ class SignInPageState extends State<SignInPage> {
                       if(value.contains('@') && !emailRegExp.hasMatch(value)) {
                         return widget.l10n.translate("Please enter a valid email address", Localizations.localeOf(context).languageCode);
                       }
-                      else if(false && !value.contains('@')){
-                        if(!letterStartRegExp.hasMatch(value)) {
-                          return widget.l10n.translate("Username must start with a letter.", Localizations.localeOf(context).languageCode);
-                        }
-                        else if(!alphNumUnderscoreRegExp.hasMatch(value)) {
-                          return widget.l10n.translate("Username can only contain letters, numbers, and underscores.", Localizations.localeOf(context).languageCode);
-                        }
-                        else if(value.length < 3 || value.length > 20) {
-                          return widget.l10n.translate("Username must be between 3 and 20 characters long.", Localizations.localeOf(context).languageCode);
-                        }
-                        return widget.l10n.translate("Please enter a valid username", Localizations.localeOf(context).languageCode);
-                      }
                       return null;
                     },
                   ),
