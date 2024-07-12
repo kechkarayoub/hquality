@@ -4,6 +4,8 @@ import 'package:hquality/storage/storage.dart';
 
 
 final RegExp alphNumUnderscoreRegExp = RegExp(r'^[a-zA-Z][a-zA-Z0-9_]*$');
+const String dateFormatLabel = 'YYYY-MM-DD';
+const String dateFormat = 'yyyy-MM-dd';
 const String defaultLanguage = "fr";
 final RegExp emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 final RegExp letterStartRegExp = RegExp(r'^[a-zA-Z]');

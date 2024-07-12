@@ -164,4 +164,12 @@ class SignInPageState extends State<SignInPage> {
     }
   }
 
+
+  @override
+  void dispose() {
+    _emailUsernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
 }

@@ -4,6 +4,11 @@
     "en": "An error occurred when log in!",
     "fr": "Une erreur s'est produite lors de la connexion !"
   },
+  "Birthday": {
+    "ar": "تاريخ الميلاد",
+    "en": "Birthday",
+    "fr": "Date de n'aissance"
+  },
   "Don't have an account? Sign up": {
     "ar": "ليس لديك حساب؟ قم بالتسجيل",
     "en": "Don't have an account? Sign up",
@@ -18,6 +23,16 @@
     "ar": "البريد الإلكتروني أو اسم المستخدم",
     "en": "Email or Username",
     "fr": "Email ou Non d'utilisateur"
+  },
+  "First name": {
+    "ar": "الاسم الشخصي",
+    "en": "First name",
+    "fr": "Prénom"
+  },
+  "First name can only contain alphabetic characters, hyphens, or apostrophes": {
+    "ar": "الاسم الشخصي لا يمكن أن يحتوي إلا على أحرف أبجدية أو شرطات أو فواصل عليا.",
+    "en": "First name can only contain alphabetic characters, hyphens, or apostrophes",
+    "fr": "Le prénom ne peut contenir que des caractères alphabétiques, des traits d'union ou des apostrophes."
   },
   "Hello": {
     "ar": "مرحبا",
@@ -69,6 +84,11 @@
     "en": "Password",
     "fr": "Mot de passe"
   },
+  "Password length must be greater than or equal to 8": {
+    "ar": "يجب أن يكون طول كلمة المرور أكبر من أو يساوي 8",
+    "en": "Password length must be greater than or equal to 8",
+    "fr": "La longueur du mot de passe doit être supérieure ou égale à 8"
+  },
   "Please enter a valid email address": {
     "ar": "المرجو إدخال بريد إلكتروني صحيح",
     "en": "Please enter your email",
@@ -89,6 +109,11 @@
     "en": "Please enter your email or username",
     "fr": "Veuillez entrer votre email ou votre nom d'utilisateur"
   },
+  "Please enter your first name": {
+    "ar": "المرجو إدخال الإسم الشخصي",
+    "en": "Please enter your first name",
+    "fr": "Veuillez entrer votre prénom"
+  },
   "Please enter your last name": {
     "ar": "المرجو إدخال الإسم العائلي",
     "en": "Please enter your last name",
@@ -98,6 +123,26 @@
     "ar": "المرجو إدخال كلمة المرور",
     "en": "Please enter your password",
     "fr": "Veuillez entrer votre mot de passe"
+  },
+  "Please enter your username": {
+    "ar": "المرجو إدخال اسم المستخدم",
+    "en": "Please enter your username",
+    "fr": "Veuillez entrer votre nom d'utilisateur"
+  },
+  "Please select your birthday": {
+    "ar": "المرجو اختيار تاريخ ميلادك",
+    "en": "Please select your birthday",
+    "fr": "Veuillez sélectionner votre date de naissance"
+  },
+  "Please re-enter your password": {
+    "ar": "المرجو إعادة إدخال كلمة المرور",
+    "en": "Please re-enter your password",
+    "fr": "Veuillez entrer à nouveau votre mot de passe"
+  },
+  "Re-enter your passworde": {
+    "ar": "أعد إدخال كلمة المرور",
+    "en": "Re-enter your passworde",
+    "fr": "Entrez à nouveau votre mot de passe"
   },
   "Select Language": {
     "ar": "اختر اللغة",
@@ -110,9 +155,19 @@
     "fr": "Se connecter"
   },
   "Sign Up": {
-    "ar": "تسجيل الدخول",
+    "ar": "التسجيل",
     "en": "Sign Up",
     "fr": "S'inscrire"
+  },
+  "The two passwords do not match": {
+    "ar": "كلمتا المرور غير متطابقتان",
+    "en": "The two passwords do not match",
+    "fr": "Les deux mots de passe ne correspondent pas"
+  },
+  "Username": {
+    "ar": "اسم المستخدم",
+    "en": "Username",
+    "fr": "Non d'utilisateur"
   },
   "Username can only contain letters, numbers, and underscores.": {
     "ar": "يمكن أن يحتوي اسم المستخدم على أحرف وأرقام وشرطات سفلية فقط.",
