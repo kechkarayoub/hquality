@@ -9,6 +9,11 @@
     "en": "Birthday",
     "fr": "Date de n'aissance"
   },
+  "Change Profile Image": {
+    "ar": "تغيير الصورة الشخصية",
+    "en": "Change Profile Image",
+    "fr": "Modifier la photo de profil"
+  },
   "Don't have an account? Sign up": {
     "ar": "ليس لديك حساب؟ قم بالتسجيل",
     "en": "Don't have an account? Sign up",
@@ -178,6 +183,11 @@
     "ar": "اختر اللغة",
     "en": "Select Language",
     "fr": "Sélectionner la langue"
+  },
+  "Select Profile Image": {
+    "ar": "اختر الصورة الشخصية",
+    "en": "Select Profile Image",
+    "fr": "Sélectionnez la photo du profil"
   },
   "Sign In": {
     "ar": "تسجيل الدخول",
