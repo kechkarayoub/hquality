@@ -36,9 +36,8 @@ void main() {
     ));
 
     // Verify the presence of key widgets and elements
-    expect(find.text('Sign In'), findsOneWidget); // App bar title
+    expect(find.text('Sign In'), findsNWidgets(2)); // App bar title & Sign in button
     expect(find.byType(TextFormField), findsNWidgets(2)); // Email/Username and Password fields
-    expect(find.text('Sign in'), findsOneWidget); // Sign in button
     expect(find.text("Don't have an account? Sign up"), findsOneWidget); // Sign up button
   });
 
@@ -63,7 +62,7 @@ void main() {
     // Enter email and password
     await tester.enterText(find.byType(TextFormField).at(0), 'test@example.com');
     await tester.enterText(find.byType(TextFormField).at(1), 'password123');
-    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.byKey(Key('signInButton')));
 
     // Add client parameter in the button press callback
     final signInButton = find.byType(ElevatedButton);
@@ -110,7 +109,7 @@ void main() {
     // Enter email and password
     await tester.enterText(find.byType(TextFormField).at(0), 'test@example.com');
     await tester.enterText(find.byType(TextFormField).at(1), 'wrongpassword');
-    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.byKey(Key('signInButton')));
 
     // Add client parameter in the button press callback
     final signInButton = find.byType(ElevatedButton);
@@ -143,7 +142,7 @@ void main() {
     // Enter an invalid email address
     await tester.enterText(find.byType(TextFormField).at(0), 'invalid@email');
     await tester.enterText(find.byType(TextFormField).at(1), 'password123');
-    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.byKey(Key('signInButton')));
     await tester.pump();
 
     // Verify the correct error message is displayed
@@ -162,7 +161,7 @@ void main() {
     // Leave the email address field empty
     await tester.enterText(find.byType(TextFormField).at(0), '');
     await tester.enterText(find.byType(TextFormField).at(1), 'password123');
-    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.byKey(Key('signInButton')));
     await tester.pump();
 
     // Verify the correct error message is displayed
@@ -181,7 +180,7 @@ void main() {
     // Leave the email address field empty
     await tester.enterText(find.byType(TextFormField).at(0), 'testusername');
     await tester.enterText(find.byType(TextFormField).at(1), '');
-    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.byKey(Key('signInButton')));
     await tester.pump();
 
     // Verify the correct error message is displayed

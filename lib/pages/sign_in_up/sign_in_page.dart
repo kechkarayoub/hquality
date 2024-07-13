@@ -83,13 +83,14 @@ class SignInPageState extends State<SignInPage> {
                   SizedBox(height: 20),
                   // Sign in button
                   ElevatedButton(
+                    key: Key('signInButton'),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Perform the sign-in logic
                         signInUser(widget.storageService, Localizations.localeOf(context).languageCode);
                       }
                     },
-                    child: Text(widget.l10n.translate("Sign in", Localizations.localeOf(context).languageCode)),
+                    child: Text(widget.l10n.translate("Sign In", Localizations.localeOf(context).languageCode)),
                   ),
                   // Sign up button
                   TextButton(
