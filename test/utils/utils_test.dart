@@ -10,6 +10,65 @@ import 'utils_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<StorageService>()])
 
 void main() {
+
+  group('HexToColor', () {
+    test('Converts hex string to Color object', () {
+      final color = hexToColor('#FF5733');
+      expect(color, equals(Color(0xFFFF5733)));
+    });
+
+    test('Converts hex string without hash to Color object', () {
+      final color = hexToColor('FF5733');
+      expect(color, equals(Color(0xFFFF5733)));
+    });
+
+    test('Handles invalid hex strings', () {
+      expect(() => hexToColor('ZZZZZZ'), throwsFormatException);
+    });
+  });
+
+  group('GetInitials', () {
+    test('Returns initials from first and last name', () {
+      final initials = getInitials('Doe', 'John');
+      expect(initials, equals('DJ'));
+    });
+
+    test('Handles empty first name', () {
+      final initials = getInitials('Doe', '');
+      expect(initials, equals('D'));
+    });
+
+    test('Handles empty last name', () {
+      final initials = getInitials('', 'John');
+      expect(initials, equals('J'));
+    });
+
+    test('Handles both names empty', () {
+      final initials = getInitials('', '');
+      expect(initials, equals(''));
+    });
+  });
+
+  group('GetRandomHexColor', () {
+    test('Generates a valid hex color string', () {
+      final hexColor = getRandomHexColor();
+      final regex = RegExp(r'^#[0-9a-fA-F]{6}$');
+      expect(regex.hasMatch(hexColor), isTrue);
+    });
+
+    test('Generates a color that is dark enough', () {
+      for (int i = 0; i < 1000; i++) {
+        final hexColor = getRandomHexColor();
+        final color = hexToColor(hexColor);
+
+        // Calculate brightness
+        final brightness = (color.red * 299 + color.green * 587 + color.blue * 114) / 1000;
+        expect(brightness, lessThanOrEqualTo(128));
+      }
+    });
+  });
+
+
   testWidgets('Logout function clears all data from storage', (WidgetTester tester) async {
     // Crée les mocks pour StorageService
     final storageService = MockStorageService();
