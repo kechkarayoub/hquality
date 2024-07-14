@@ -5,7 +5,7 @@ import 'package:hquality/components/initials_avatar.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerWidget extends StatefulWidget {
-  final Function(File?) onImageSelected;   // Callback function to pass the selected image file
+  final Function(XFile?) onImageSelected;   // Callback function to pass the selected image file
   final String initials;  // Initials to display if no image is selected
   final String initialsBgColor;  // Background color for the initials avatar
   final String labelText;  // Label text for the image picker button
@@ -26,7 +26,8 @@ class ImagePickerWidget extends StatefulWidget {
 }
 
 class ImagePickerWidgetState extends State<ImagePickerWidget> {
-  File? _selectedImage;  // File object for the selected image
+  XFile? _selectedImage;  // File object for the selected image
+  String? _webImageUrl;
 
   @override
   void initState() {
@@ -38,7 +39,11 @@ class ImagePickerWidgetState extends State<ImagePickerWidget> {
     final pickedFile = await ImagePicker().pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
-        _selectedImage = File(pickedFile.path);  // Update the selected image file
+        if (kIsWeb) {
+          _webImageUrl = pickedFile.path; // Using the path as URL for web
+          _selectedImage = XFile(pickedFile.path);
+        }
+        _selectedImage = XFile(pickedFile.path);  // Update the selected image file
       });
       widget.onImageSelected(_selectedImage);  // Call the callback function with the selected image
     }
@@ -48,12 +53,13 @@ class ImagePickerWidgetState extends State<ImagePickerWidget> {
   void _removeImage() {
     setState(() {
       _selectedImage = null;  // Clear the selected image file
+      _webImageUrl = null;
     });
     widget.onImageSelected(null);  // Call the callback function with null to indicate image removal
   }
 
   // This method is for testing purposes only
-  void setSelectedImageForTest(File image) {
+  void setSelectedImageForTest(XFile image) {
     setState(() {
       _selectedImage = image;
     });
@@ -61,23 +67,28 @@ class ImagePickerWidgetState extends State<ImagePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print("kIsWeb");
-    print(kIsWeb);
     return Column(
       children: [
         // Display the selected image if available
-        if (_selectedImage != null)
+        if (_selectedImage != null || _webImageUrl != null)
           Stack(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),  // Circular shape for the image
-                child: Image.file(
-                  _selectedImage!,
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                ),
-              ),
+                child: kIsWeb
+                  ? Image.network(
+                      _webImageUrl!,
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.file(
+                      File(_selectedImage!.path),
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
               Positioned(
                 right: 0,
                 child: GestureDetector(

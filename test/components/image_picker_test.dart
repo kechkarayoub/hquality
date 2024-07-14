@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hquality/components/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 void main() {
   testWidgets('ImagePickerWidget displays and removes image correctly', (WidgetTester tester) async {
@@ -27,7 +29,7 @@ void main() {
 
     // Simulate picking an image by setting the state manually
     final imagePickerWidgetState = tester.state<ImagePickerWidgetState>(find.byType(ImagePickerWidget));
-    imagePickerWidgetState.setSelectedImageForTest(File('path/to/image.png'));
+    imagePickerWidgetState.setSelectedImageForTest(XFile(File('path/to/image.png').path));
 
 
     // Rebuild the widget
