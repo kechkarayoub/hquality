@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -5,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:hquality/storage/storage.dart';
 import 'package:hquality/utils/utils.dart';
 import 'utils_test.mocks.dart';
+
 
 // Génère le code pour Mockito
 @GenerateNiceMocks([MockSpec<StorageService>()])
@@ -68,6 +71,11 @@ void main() {
     });
   });
 
+  test('DetermineMimeType returns correct MIME type', () {
+    expect(determineMimeType('image.png'), 'image/png');
+    expect(determineMimeType('image.jpg'), 'image/jpeg');
+    expect(determineMimeType('unknown'), 'image/jpeg'); // Default fallback
+  });
 
   testWidgets('Logout function clears all data from storage', (WidgetTester tester) async {
     // Crée les mocks pour StorageService

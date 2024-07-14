@@ -1,7 +1,15 @@
 
+import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:hquality/storage/storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mime/mime.dart';
 
 
 final RegExp alphNumUnderscoreRegExp = RegExp(r'^[a-zA-Z][a-zA-Z0-9_]*$');
@@ -67,4 +75,72 @@ void logout(StorageService storageService, BuildContext context) {
   /// [context] - The build context used for navigation (if needed).
   storageService.clear();
   //Navigator.pushReplacementNamed(context, '/sign-in');
+}
+
+/// Ensures the user is authenticated with Firebase.
+Future<void> ensureUserIsAuthenticated() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user == null) {
+    try {
+      String firebaseEmail = dotenv.env['FIREBASE_EMAIL'] ?? 'No email provided';
+      String firebasePassword = dotenv.env['FIREBASE_PASSWORD'] ?? 'No password provided';
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: firebaseEmail,  // Replace with your email
+        password: firebasePassword,        // Replace with your password
+      );
+      user = userCredential.user;
+    } catch (e) {
+      // Handle sign-in error
+      print('Sign-in error: $e');
+    }
+  }
+}
+
+/// Determines the MIME type of a file based on its path or bytes.
+String determineMimeType(String path, {Uint8List? imageBytes}) {
+  final mimeType = lookupMimeType(path);
+  if (mimeType != null) {
+    return mimeType;
+  }
+  // Fallback based on content type (if available)
+  if (imageBytes != null) {
+    final mimeType = lookupMimeType('', headerBytes: imageBytes);
+    if (mimeType != null) {
+      return mimeType;
+    }
+  }
+  // Default to image/jpeg if no mime type can be determined
+  return 'image/jpeg';
+}
+
+/// Uploads an image to Firebase Storage and returns the download URL.
+Future<String> uploadImage(XFile image) async {
+  await ensureUserIsAuthenticated();
+  Uint8List? imageBytes;
+
+  // Define metadata with the correct MIME type
+  if (kIsWeb) {
+    imageBytes = await image.readAsBytes();
+  }
+  // Determine MIME type
+  final mimeType = determineMimeType(image.path, imageBytes: imageBytes);
+  final metadata = SettableMetadata(contentType: mimeType);
+  // Create a reference to the location you want to upload the image
+  Reference storageReference = FirebaseStorage.instance
+      .ref()
+      .child('images/${DateTime.now().millisecondsSinceEpoch.toString()}');
+
+  if (kIsWeb) {
+      // Upload for Web
+      Uint8List imageBytes = await image.readAsBytes();
+      UploadTask uploadTask = storageReference.putData(imageBytes, metadata);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      return await taskSnapshot.ref.getDownloadURL();
+    } else {
+      // Upload for Mobile and Desktop
+      File file = File(image.path);
+      UploadTask uploadTask = storageReference.putFile(file, metadata);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      return await taskSnapshot.ref.getDownloadURL();
+    }
 }
