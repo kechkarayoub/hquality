@@ -11,7 +11,6 @@ import 'package:hquality/pages/sign_in_up/sign_up_page.dart';
 import 'package:hquality/storage/storage.dart';
 import 'package:hquality/utils/utils.dart';
 
-
 void main() async {
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
