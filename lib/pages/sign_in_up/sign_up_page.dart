@@ -258,8 +258,6 @@ class SignUpPageState extends State<SignUpPage> {
     final password = _passwordController.text;
     final username = _usernameController.text;
 
-    print("Selected birthday");
-    print(birthday);
 
     final dynamic data = {
       "email": email,
@@ -272,17 +270,15 @@ class SignUpPageState extends State<SignUpPage> {
       "password": password,
       "username": username,
     };
-    // if (_selectedImage != null) {
-    //   try{
-    //   String imageUrl = await uploadImage(_selectedImage!);
-    //   data["image_url"] = imageUrl;
-    //   }
-    //   catch(er){
-    //     print(er);
-    //   }
-    // }
-    print("datadatadatadatadatadata");
-    print(data);
+    if (_selectedImage != null) {
+      try{
+      String imageUrl = await uploadImage(_selectedImage!);
+      data["image_url"] = imageUrl;
+      }
+      catch(er){
+        print(er);
+      }
+    }
 
     client ??= http.Client(); // Use default client if none is provided
     try {
