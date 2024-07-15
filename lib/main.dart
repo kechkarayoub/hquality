@@ -1,3 +1,6 @@
+
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,8 +11,10 @@ import 'package:hquality/pages/sign_in_up/sign_up_page.dart';
 import 'package:hquality/storage/storage.dart';
 import 'package:hquality/utils/utils.dart';
 
+
 void main() async {
   await dotenv.load(fileName: ".env");
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   WidgetsFlutterBinding.ensureInitialized();
   final l10n = L10n();
   await l10n.loadTranslations();
