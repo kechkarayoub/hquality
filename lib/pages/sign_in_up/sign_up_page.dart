@@ -88,16 +88,19 @@ class SignUpPageState extends State<SignUpPage> {
                           style: TextStyle(color: Colors.red),
                         ),
                       ),
-                      ImagePickerWidget(
-                        initials: initials,
-                        initialsBgColor: initialsBgColor,
-                        labelText: widget.l10n.translate(_selectedImage == null ? "Select Profile Image" : "Change Profile Image", Localizations.localeOf(context).languageCode),
-                        labelTextCamera: widget.l10n.translate(_selectedImage == null ? "Take photo" : "Change photo", Localizations.localeOf(context).languageCode),
-                        onImageSelected: (XFile? image) {
-                          setState(() {
-                            _selectedImage = image;
-                          });
-                        },
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: ImagePickerWidget(
+                          initials: initials,
+                          initialsBgColor: initialsBgColor,
+                          labelText: widget.l10n.translate(_selectedImage == null ? "Select Profile Image" : "Change Profile Image", Localizations.localeOf(context).languageCode),
+                          labelTextCamera: widget.l10n.translate(_selectedImage == null ? "Take photo" : "Change photo", Localizations.localeOf(context).languageCode),
+                          onImageSelected: (XFile? image) {
+                            setState(() {
+                              _selectedImage = image;
+                            });
+                          },
+                        ),
                       ),
                     TextFormField(
                       controller: _lastNameController,
@@ -229,31 +232,34 @@ class SignUpPageState extends State<SignUpPage> {
                       },
                     ),
                     SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _isSignUpApiSent ? null : () {
-                        if (_formKey.currentState!.validate()) {
-                          // Perform the sign-up logic
-                          signUpUser(widget.storageService, Localizations.localeOf(context).languageCode);
-                        }
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (_isSignUpApiSent)
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: SizedBox(
-                                width: 16,
-                                height: 16,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                  strokeWidth: 2.0,
+                    Container(
+                      margin: EdgeInsets.only(bottom: 100),  // Add margin bottom here
+                      child: ElevatedButton(
+                        onPressed: _isSignUpApiSent ? null : () {
+                          if (_formKey.currentState!.validate()) {
+                            // Perform the sign-up logic
+                            signUpUser(widget.storageService, Localizations.localeOf(context).languageCode);
+                          }
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (_isSignUpApiSent)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: SizedBox(
+                                  width: 16,
+                                  height: 16,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                    strokeWidth: 2.0,
+                                  ),
                                 ),
                               ),
-                            ),
-                          Text(widget.l10n.translate("Sign Up", Localizations.localeOf(context).languageCode)),
-                        ]
+                            Text(widget.l10n.translate("Sign Up", Localizations.localeOf(context).languageCode)),
+                          ]
+                        )
                       )
                     ),
                   ],
