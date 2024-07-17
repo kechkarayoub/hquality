@@ -19,6 +19,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class SignInPageState extends State<SignInPage> {
+  bool _isSignInApiSent = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailUsernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -84,13 +85,31 @@ class SignInPageState extends State<SignInPage> {
                   // Sign in button
                   ElevatedButton(
                     key: Key('signInButton'),
-                    onPressed: () {
+                    onPressed: _isSignInApiSent ? null : () {
                       if (_formKey.currentState!.validate()) {
                         // Perform the sign-in logic
                         signInUser(widget.storageService, Localizations.localeOf(context).languageCode);
                       }
                     },
-                    child: Text(widget.l10n.translate("Sign In", Localizations.localeOf(context).languageCode)),
+                    child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (_isSignInApiSent)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  strokeWidth: 2.0,
+                                ),
+                              ),
+                            ),
+                          Text(widget.l10n.translate("Sign In", Localizations.localeOf(context).languageCode)),
+                        ]
+                      )
                   ),
                   // Sign up button
                   TextButton(
@@ -117,6 +136,9 @@ class SignInPageState extends State<SignInPage> {
 
     client ??= http.Client(); // Use default client if none is provided
 
+    setState(() {
+      _isSignInApiSent = true;
+    });
     final dynamic data = {
       "email_or_username": emailOrUsername,
       "selected_language": currentLanguage,
@@ -130,23 +152,27 @@ class SignInPageState extends State<SignInPage> {
       if(response["success"] && response["user"] != null){
         setState(() {
           _errorMessage = null;  // Clear the error message on successful sign-in
+          _isSignInApiSent = false;
         });
         widget.storageService.set(key: 'user_session', obj: response["user"], updateNotifier: true);
       }
       else if(!response["success"] && response["message"] != null){
         setState(() {
           _errorMessage = response["message"];  // Set the error message on unsuccessful sign-in
+          _isSignInApiSent = false;
         });
         print('Sign-in error: ${response["message"]}');
       }
       else{
         setState(() {
           _errorMessage = "An error occurred when log in!";  // Set the error message on unsuccessful sign-in
+          _isSignInApiSent = false;
         });
       }
     } catch (e) {
       setState(() {
         _errorMessage = "An error occurred when log in!";  // Set the error message on unsuccessful sign-in
+          _isSignInApiSent = false;
       });
       // Handle any errors that occurred during the HTTP request
       print('Sign-in error: $e');

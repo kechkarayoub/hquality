@@ -24,6 +24,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class SignUpPageState extends State<SignUpPage> {
+  bool _isSignUpApiSent = false;
   final _formKey = GlobalKey<FormState>();
   final DateFormat _dateFormat = DateFormat(dateFormat);
   final TextEditingController _birthdayController = TextEditingController();
@@ -231,13 +232,31 @@ class SignUpPageState extends State<SignUpPage> {
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: _isSignUpApiSent ? null : () {
                         if (_formKey.currentState!.validate()) {
                           // Perform the sign-up logic
                           signUpUser(widget.storageService, Localizations.localeOf(context).languageCode);
                         }
                       },
-                      child: Text(widget.l10n.translate("Sign Up", Localizations.localeOf(context).languageCode)),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (_isSignUpApiSent)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  strokeWidth: 2.0,
+                                ),
+                              ),
+                            ),
+                          Text(widget.l10n.translate("Sign Up", Localizations.localeOf(context).languageCode)),
+                        ]
+                      )
                     ),
                   ],
                 ),
@@ -259,7 +278,11 @@ class SignUpPageState extends State<SignUpPage> {
     final username = _usernameController.text;
 
 
+    setState(() {
+      _isSignUpApiSent = true;
+    });
     final dynamic data = {
+      "birthday": birthday,
       "email": email,
       "first_name": firsName,
       "gender": _selectedGender,
@@ -272,13 +295,15 @@ class SignUpPageState extends State<SignUpPage> {
     };
     if (_selectedImage != null) {
       try{
-      String imageUrl = await uploadImage(_selectedImage!);
-      data["image_url"] = imageUrl;
+        String imageUrl = await uploadImage(_selectedImage!);
+        data["image_url"] = imageUrl;
       }
       catch(er){
         print(er);
       }
     }
+    print("data:");
+    print(data);
 
     client ??= http.Client(); // Use default client if none is provided
     try {
@@ -288,23 +313,27 @@ class SignUpPageState extends State<SignUpPage> {
       if(response["success"] && response["user"] != null){
         setState(() {
           _errorMessage = null;  // Clear the error message on successful sign-in
+          _isSignUpApiSent = false;
         });
         widget.storageService.set(key: 'user_session', obj: response["user"], updateNotifier: true);
       }
       else if(!response["success"] && response["message"] != null){
         setState(() {
           _errorMessage = response["message"];  // Set the error message on unsuccessful sign-in
+          _isSignUpApiSent = false;
         });
         print('Sign-in error: ${response["message"]}');
       }
       else{
         setState(() {
           _errorMessage = "An error occurred when log in!";  // Set the error message on unsuccessful sign-in
+          _isSignUpApiSent = false;
         });
       }
     } catch (e) {
       setState(() {
         _errorMessage = "An error occurred when log in!";  // Set the error message on unsuccessful sign-in
+          _isSignUpApiSent = false;
       });
       // Handle any errors that occurred during the HTTP request
       print('Sign-in error: $e');

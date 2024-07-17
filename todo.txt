@@ -2,3 +2,5 @@ saving time in server vs front.
 check images upload for deskto && mobile app
 fix text selection on lastname && firstname on registration
 Test uploadImage in utils/utils.dart
+Horizontal scroll
+passworf forgeted
