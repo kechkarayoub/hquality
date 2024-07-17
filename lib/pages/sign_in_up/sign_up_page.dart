@@ -103,9 +103,8 @@ class SignUpPageState extends State<SignUpPage> {
                       controller: _lastNameController,
                       decoration: InputDecoration(labelText: widget.l10n.translate("Last name", Localizations.localeOf(context).languageCode)),
                       onChanged: (value) {
-                        _lastNameController.text = value;
                         setState(() {
-                          initials = getInitials(_lastNameController.text, _firstNameController.text);
+                          initials = getInitials(value, _firstNameController.text);
                         });
                       },
                       validator: (value) {
@@ -122,9 +121,8 @@ class SignUpPageState extends State<SignUpPage> {
                       controller: _firstNameController,
                       decoration: InputDecoration(labelText: widget.l10n.translate("First name", Localizations.localeOf(context).languageCode)),
                       onChanged: (value) {
-                        _firstNameController.text = value;
                         setState(() {
-                          initials = getInitials(_lastNameController.text, _firstNameController.text);
+                          initials = getInitials(_lastNameController.text, value);
                         });
                       },
                       validator: (value) {
